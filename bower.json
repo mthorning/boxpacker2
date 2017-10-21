@@ -1,0 +1,23 @@
+{
+  "name": "boxpacker",
+  "description": "weekend remake using marionette",
+  "main": "main.js",
+  "authors": [
+    "M Thorning"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap": "^3.3.7",
+    "backbone.marionette": "marionette#^3.4.4",
+    "backbone": "^1.3.3",
+    "requirejs": "^2.3.5"
+  }
+}

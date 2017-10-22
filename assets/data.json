@@ -1,0 +1,44 @@
+{
+    "inventory": [
+        {
+            "id": 1,
+            "type": "box",
+            "name": "Kitchen" 
+        },
+        {
+            "id": 2,
+            "type": "box",
+            "name": "Bathroom" 
+        },
+        {
+            "id": 3,
+            "type": "box",
+            "name": "Bedroom" 
+        },
+        {
+            "id": 4,
+            "type": "box",
+            "name": "Living Room" 
+        },
+        {
+            "id": 5,
+            "type": "item",
+            "name": "Spoon" 
+        },
+        {
+            "id": 6,
+            "type": "item",
+            "name": "Knife" 
+        },
+        {
+            "id": 7,
+            "type": "item",
+            "name": "Fork" 
+        },
+        {
+            "id": 8,
+            "type": "item",
+            "name": "Plate" 
+        }
+    ]
+}

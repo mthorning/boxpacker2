@@ -6,9 +6,12 @@ define([
     var BoxModel = Backbone.Model.extend();
 
     var BoxCollection = Backbone.Collection.extend({
-        localStorage: new Store('boxes-backbone'),
-        model: BoxModel
+        url: 'assets/data.json',
+        model: BoxModel,
+        parse: function(data) {
+            return data.inventory;
+        }
     });
     
-    return BoxCollection;
+    return { BoxCollection, BoxModel };
 });

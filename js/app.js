@@ -1,59 +1,52 @@
 define([
-    'backbone',
     'marionette',
     'boxes',
-    'boxView'
-    ], function(Backbone, Marionette, BoxCollection, BoxView) {
+    'boxView',
+    ], function(Marionette, Boxes, BoxView) {
     
-    var MainLayout = Marionette.LayoutView.extend({
+    var MainLayout = Backbone.Marionette.LayoutView.extend({
         template: _.template($('#app-tmpl').html()),
         el: '#appContainer',
         regions: {
-            'boxList': '#boxListPanel'
+            'boxList': '#boxListPanel',
+            'itemList': '#itemListPanel'
         }
     });
 
-    var app = {
-        boxes: null,
-        boxesView: null,
-        itemsView: null,
+    var app = new Backbone.Marionette.Application({
         layout: null,
+        collection: null,
+        boxCollection: null,
+        boxView: null,
         start: function() {
-            console.log("app starting...");
-            this.layout = new MainLayout();
-            this.layout.render();
-            this.boxes = new BoxCollection();
+            this.createCollections();
+        },
+        createCollections: function() {
             var self = this;
-            this.boxes.fetch({
+            this.collection = new Boxes.BoxCollection();
+            this.collection.fetch({ 
                 reset: true,
-                success: function(collection) {
-
-                    //temp for testing
-                    if(collection.length === 0) {
-                        self.boxes.add([
-                            {type: 'box', name: 'Kitchen'},
-                            {type: 'box', name: 'Bathroom'},
-                            {type: 'box', name: 'Bedroom'},
-                            {type: 'box', name: 'Bedroom 2'},
-                            {type: 'box', name: 'Porch'},
-                        ])
-                    }
-                    //-----------
-
-                    console.log('success: ', collection);
-                    Backbone.history.start();
-                    self.showBoxList(collection);
+                success: function(coll) {
+                    var boxes = self.collection.where({ type: 'box' });
+                    self.boxCollection = new Boxes.BoxCollection(boxes);
+                    console.log(self.boxCollection);
+                    self.createLayout();
+                    self.showBoxes();
                 },
-                error: function(args) {
-                    console.log('error fetching collection: ', args);
-                }
+                error: function(arg) {
+                    console.log("error: ", arg);
+                } 
             });
         },
-        showBoxList: function(collection) {
-            var boxView = new BoxView({ collection: collection })
-            this.layout.boxList.show(boxView);
+        createLayout: function() {
+            this.layout = new MainLayout();
+            this.layout.render();
+        },
+        showBoxes: function() {
+            this.boxView = new BoxView({ collection: this.collection });
+            this.layout.boxList.show(this.boxView);
         }
-    }
-    
+    });
+
     return app;
 });

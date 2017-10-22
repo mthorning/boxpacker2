@@ -19,14 +19,21 @@
         <![endif]-->
         <div class="container-fluid" id="appContainer"></div>
 
-        <script type="text/template" id="app-tmpl">
+        <script type="text/html" id="app-tmpl">
             <div class="row">
                 <div class="panel panel-default col-md-3 col-md-offset-1">
                     <div class="panel-heading">
                             <h3 class="panel-title">User Input</h3>
                     </div>
-                    <div class="panel-body">
-                            Panel content
+                    <div class="panel-body" id="inputsPanel">
+                        <form class="form-inline" role="form">
+                            <div class="form-group">
+                                <label class="sr-only" for="">New Box: </label>
+                                <input type="text" class="form-control" id="boxInput" placeholder="Enter Box Name">
+                                <button type="submit" class="btn btn-primary form-control">Submit</button>
+                            </div>
+                        </form>
+                        
                     </div>
                 </div>
                 <div class="panel panel-default col-md-3">
@@ -41,15 +48,15 @@
                     <div class="panel-heading">
                             <h3 class="panel-title">Box Items</h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body" id="itemsListPanel">
                             Panel content
                     </div>
                 </div>
             </div>
         </script>
-        
+
         <script type="text/template" id="boxListItem-tmpl">
-            <a href="box/<%= name %>"><%= name %></a>
+            <%= name %>
         </script>
 
         <script data-main="js/main" src="bower_components/requirejs/require.js"></script>

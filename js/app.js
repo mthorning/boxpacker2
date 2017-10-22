@@ -29,7 +29,6 @@ define([
                 success: function(coll) {
                     var boxes = self.collection.where({ type: 'box' });
                     self.boxCollection = new Boxes.BoxCollection(boxes);
-                    console.log(self.boxCollection);
                     self.createLayout();
                     self.showBoxes();
                 },
@@ -43,7 +42,7 @@ define([
             this.layout.render();
         },
         showBoxes: function() {
-            this.boxView = new BoxView({ collection: this.collection });
+            this.boxView = new BoxView({ collection: this.boxCollection });
             this.layout.boxList.show(this.boxView);
         }
     });

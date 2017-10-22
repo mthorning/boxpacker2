@@ -6,7 +6,7 @@ define(['marionette'], function(Marionette) {
         className: 'list-group-item'
     });
 
-    var BoxList = Backbone.Marionette.CompositeView.extend({
+    var BoxList = Backbone.Marionette.CollectionView.extend({
         tagName: 'ul',
         className: 'list-group',
         childView: BoxItem

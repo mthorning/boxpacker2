@@ -23,22 +23,26 @@
         {
             "id": 5,
             "type": "item",
-            "name": "Spoon" 
+            "name": "Spoon",
+            "box": "Kitchen"
         },
         {
             "id": 6,
             "type": "item",
-            "name": "Knife" 
+            "name": "Knife",
+            "box": "Kitchen" 
         },
         {
             "id": 7,
             "type": "item",
-            "name": "Fork" 
+            "name": "Fork",
+            "box": "Kitchen"
         },
         {
             "id": 8,
             "type": "item",
-            "name": "Plate" 
+            "name": "Plate",
+            "box": "Kitchen" 
         }
     ]
 }

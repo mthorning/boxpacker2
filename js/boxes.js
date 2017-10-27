@@ -10,8 +10,19 @@ define([
         model: BoxModel,
         parse: function(data) {
             return data.inventory;
+        },
+        addBox: function(name) {
+            var box = new BoxModel({
+                type: 'box',
+                name: name,
+                id: this.newId()
+            });
+            this.add(box);
+        },
+        newId: function() {
+            return this.length ? this.last().get('id') + 1 : 1;
         }
     });
     
-    return { BoxCollection, BoxModel };
+    return BoxCollection;
 });

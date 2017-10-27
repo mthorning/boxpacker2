@@ -21,34 +21,36 @@
 
         <script type="text/template" id="app-tmpl">
             <div class="row">
-                <div class="panel panel-default col-md-3 col-md-offset-1">
-                    <div class="panel-heading">
-                            <h3 class="panel-title">User Input</h3>
-                    </div>
+                <div class="panel panel-default  col-md-offset-2 col-md-3">
                     <div class="panel-body">
-                            Panel content
+                            <div id="inputs">
+                                <legend>Inputs</legend>
+                                <div class="form-group">
+                                    <label for="newBox">New Box</label>
+                                    <input type="text" class="form-control" id="newBox" placeholder="Enter Box Name" autofocus>
+                                    <br />
+                                    <label for="newItem">New Item</label>
+                                    <input type="text" class="form-control" id="newItem" placeholder="Enter Item Name">
+                                </div>
+                            </div>
                     </div>
                 </div>
                 <div class="panel panel-default col-md-3">
-                    <div class="panel-heading">
-                            <h3 class="panel-title">Boxes</h3>
-                    </div>
-                    <div class="panel-body" id="boxListPanel">
-                            Panel content
+                    <div class="panel-body">
+                        <legend>Boxes</legend>
+                            <div id="boxListPanel"></div>
                     </div>
                 </div>
                 <div class="panel panel-default col-md-3">
-                    <div class="panel-heading">
-                            <h3 class="panel-title">Box Items</h3>
-                    </div>
                     <div class="panel-body">
-                            Panel content
+                        <legend>Box Items</legend>
+                            <div id="itemListPanel"></div>
                     </div>
                 </div>
             </div>
         </script>
         
-        <script type="text/template" id="boxListItem-tmpl">
+        <script type="text/template" id="listItem-tmpl">
             <%= name %>
         </script>
 

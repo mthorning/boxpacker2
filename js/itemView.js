@@ -1,20 +1,19 @@
 define(['marionette', 'boxes'], function(Marionette, Boxes) {
 
-    var Box = Marionette.ItemView.extend({
+    var Item = Marionette.ItemView.extend({
         template: _.template($('#listItem-tmpl').html()),
         tagName: 'li',
         className: 'list-group-item',
     });
 
-    var BoxList = Marionette.CollectionView.extend({
+    var ItemList = Marionette.CollectionView.extend({
+        childView: Item,
         tagName: 'ul',
         className: 'list-group',
-        childView: Box,
-        filter: function(child) {
-            return child.get('type') === 'box';
+        filter: function(model) {
+            return model.get('type') === 'item';
         }
     });
 
-    return BoxList;
-
+    return ItemList;
 });

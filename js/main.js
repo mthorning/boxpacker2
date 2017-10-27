@@ -7,7 +7,8 @@ require.config({
         'underscore': '../bower_components/underscore/underscore',
         'radio': '../bower_components/backbone.radio/build/backbone.radio',
         'marionette': '../bower_components/backbone.marionette/lib/backbone.marionette',
-        'backbone': '../bower_components/backbone/backbone'
+        'backbone': '../bower_components/backbone/backbone',
+        'backbone-forms': '../bower_components/backbone-forms/distribution.amd/backbone-forms'
     },
     shim: {
         'marionette': {

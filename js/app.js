@@ -53,10 +53,14 @@ define([
             document.getElementById('inputs').addEventListener('keydown', function(e) {
                 if(e.keyCode === 13) {
                     var boxName = document.querySelector('#newBox').value;
+                    var itemName = document.querySelector('#newItem').value;
                     if(boxName) {
                         self.collection.addBox(boxName);
-                        //clear inputs
+                        boxName.value = '';
+                    } else if(itemName) {
+                        self.collection.addItem(itemName);
                     }
+
                 }
 
             });                

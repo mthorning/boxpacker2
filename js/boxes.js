@@ -19,6 +19,20 @@ define([
             });
             this.add(box);
         },
+        addItem:  function(name) {
+        var box = this.findWhere({ selected: true }).get('name');
+        if(box) {
+            var item = new BoxModel({
+                type: 'item',
+                name: name,
+                id: this.newId(),
+                box: box
+            });
+            this.add(item);
+        } else {
+            alert('Please select a box to add the item to.');
+        }
+        },
         newId: function() {
             return this.length ? this.last().get('id') + 1 : 1;
         }

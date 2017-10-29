@@ -7,6 +7,13 @@ define(['marionette', 'boxes'], function(Marionette, Boxes) {
         events: {
             'click': 'onBoxClick'
         },
+        onRender: function() {
+            if(this.model.get('selected')) {
+                this.el.classList.add('selected');
+            } else {
+                this.el.classList.remove('selected');
+            }
+        },
         onBoxClick: function() {
             this.model.trigger('remove:selected');
             this.model.set({ selected: true });
@@ -19,6 +26,7 @@ define(['marionette', 'boxes'], function(Marionette, Boxes) {
         childView: Box,
         initialize: function() {
             this.listenTo(this.collection, 'remove:selected', this.removeSelected)
+            this.listenTo(this.collection, 'change', this.render)
         },  
         filter: function(child) {
             return child.get('type') === 'box';
@@ -27,7 +35,7 @@ define(['marionette', 'boxes'], function(Marionette, Boxes) {
             this.collection.filter(function(model) {
                 return model.get('type') === 'box' && model.get('selected');
             }).forEach(function(model) {
-                model.set({ selected: false}, { silent: true });
+                model.unset( 'selected', { silent: true });
             });
         }
     });

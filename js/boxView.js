@@ -4,8 +4,9 @@ define(['marionette', 'boxes'], function(Marionette, Boxes) {
         template: _.template($('#listItem-tmpl').html()),
         tagName: 'li',
         className: 'list-group-item',
-        events: {
-            'click': 'onBoxClick'
+        triggers: {
+            'click': 'box:click',
+            'change': 'render'
         },
         onRender: function() {
             if(this.model.get('selected')) {
@@ -25,8 +26,8 @@ define(['marionette', 'boxes'], function(Marionette, Boxes) {
         className: 'list-group',
         childView: Box,
         initialize: function() {
-            this.listenTo(this.collection, 'remove:selected', this.removeSelected)
-            this.listenTo(this.collection, 'change', this.render)
+            this.listenTo(this.collection, 'remove:selected', this.removeSelected);
+            this.listenTo(this.collection, 'change', this.render);
         },  
         filter: function(child) {
             return child.get('type') === 'box';
@@ -35,7 +36,7 @@ define(['marionette', 'boxes'], function(Marionette, Boxes) {
             this.collection.filter(function(model) {
                 return model.get('type') === 'box' && model.get('selected');
             }).forEach(function(model) {
-                model.unset( 'selected', { silent: true });
+                model.unset( 'selected', { silent: false });
             });
         }
     });

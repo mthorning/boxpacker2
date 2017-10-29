@@ -7,7 +7,7 @@ define(['marionette', 'boxes'], function(Marionette, Boxes) {
     });
 
     var ItemList = Marionette.CollectionView.extend({
-        displayBox: undefined,
+        displayBox: null,
         childView: Item,
         tagName: 'ul',
         className: 'list-group',
@@ -21,6 +21,8 @@ define(['marionette', 'boxes'], function(Marionette, Boxes) {
             var selectedBox = this.collection.findWhere({ selected: true });
             if(selectedBox) {
                 this.displayBox = selectedBox.get('name');
+            } else {
+                this.displayBox = null;
             }
         }
     });

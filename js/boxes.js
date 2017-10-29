@@ -1,7 +1,6 @@
 define([
-    'backbone', 
-    'localStorage'
-    ], function(Backbone, Store) {
+    'marionette', 
+    ], function(Marionette) {
 
     var BoxModel = Backbone.Model.extend();
 
@@ -15,9 +14,11 @@ define([
             var box = new BoxModel({
                 type: 'box',
                 name: name,
-                id: this.newId()
+                id: this.newId(),
             });
+            this.trigger('remove:selected');
             this.add(box);
+            box.set({ selected: true });
         },
         addItem:  function(name) {
         var box = this.findWhere({ selected: true }).get('name');

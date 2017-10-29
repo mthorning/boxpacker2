@@ -52,18 +52,26 @@ define([
             var self = this;
             document.getElementById('inputs').addEventListener('keydown', function(e) {
                 if(e.keyCode === 13) {
-                    var boxName = document.querySelector('#newBox').value;
-                    var itemName = document.querySelector('#newItem').value;
-                    if(boxName) {
-                        self.collection.addBox(boxName);
+                    var boxName = document.querySelector('#newBox');
+                    var itemName = document.querySelector('#newItem');
+                    if(boxName.value) {
+                        self.collection.addBox(boxName.value);
                         boxName.value = '';
-                    } else if(itemName) {
-                        self.collection.addItem(itemName);
+                        if(itemName.value) {
+                            self.addItem(itemName);
+                        }
+                    } else if(itemName.value) {
+                        self.addItem(itemName);
                     }
 
                 }
 
             });                
+        },
+        addItem: function(itemName) {
+            console.log(itemName);
+            this.collection.addItem(itemName.value);
+            itemName.value = '';
         }
     });
 

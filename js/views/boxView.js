@@ -1,9 +1,6 @@
-define(['marionette', 'boxes'], function(Marionette, Boxes) {
+define(['views/base', 'boxes'], function(Base, Boxes) {
 
-    var Box = Marionette.ItemView.extend({
-        template: _.template($('#listItem-tmpl').html()),
-        tagName: 'li',
-        className: 'list-group-item',
+    var Box = Base.Item.extend({
         triggers: {
             'click': 'box:click',
             'change': 'render'
@@ -21,13 +18,10 @@ define(['marionette', 'boxes'], function(Marionette, Boxes) {
         }
     });
 
-    var BoxList = Marionette.CollectionView.extend({
-        tagName: 'ul',
-        className: 'list-group',
+    var BoxList = Base.List.extend({
         childView: Box,
         initialize: function() {
             this.listenTo(this.collection, 'remove:selected', this.removeSelected);
-            this.listenTo(this.collection, 'change', this.render);
         },  
         filter: function(child) {
             return child.get('type') === 'box';

@@ -1,8 +1,8 @@
 define([
     'marionette',
     'boxes',
-    'boxView',
-    'itemView'
+    'views/boxView',
+    'views/itemView'
     ], function(Marionette, Boxes, BoxView, ItemView) {
     
     var MainLayout = Backbone.Marionette.LayoutView.extend({

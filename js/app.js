@@ -50,20 +50,28 @@ define([
         },
         setEventListeners: function() {
             var self = this;
-            document.getElementById('inputs').addEventListener('keydown', function(e) {
-                if(e.keyCode === 13) {
-                    var boxName = document.querySelector('#newBox');
-                    var itemName = document.querySelector('#newItem');
-                    if(boxName.value) {
-                        self.collection.addBox(boxName.value);
-                        boxName.value = '';
-                        if(itemName.value) {
+            document.getElementById('inputs').addEventListener('input', function(e) {
+                if(e.target.id === 'search') {
+                    var searchTerm = e.target.value.toLowerCase();
+                    var matchedItems = self.collection.filter(function(model) {
+                        return model.get('name').toLowerCase().indexOf(searchTerm) > -1;
+                    });
+                    console.log(matchedItems);
+                } else {
+                    if(e.keyCode === 13) {
+                        var boxName = document.querySelector('#newBox');
+                        var itemName = document.querySelector('#newItem');
+                        if(boxName.value) {
+                            self.collection.addBox(boxName.value);
+                            boxName.value = '';
+                            if(itemName.value) {
+                                self.addItem(itemName);
+                            }
+                        } else if(itemName.value) {
                             self.addItem(itemName);
                         }
-                    } else if(itemName.value) {
-                        self.addItem(itemName);
+    
                     }
-
                 }
 
             });                

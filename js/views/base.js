@@ -4,6 +4,12 @@ define(['marionette'], function(Marionette) {
         template: _.template($('#listItem-tmpl').html()),
         tagName: 'li',
         className: 'list-group-item',
+        events: {
+            'click #closeButton': 'deleteItem'
+        },
+        deleteItem: function() {
+            this.model.collection.remove(this.model);
+        }
     });
 
     var List = Marionette.CollectionView.extend({

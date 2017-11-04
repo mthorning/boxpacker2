@@ -1,9 +1,12 @@
 .panel {
     margin: 20px;
+    min-height: 325px;
+    overflow-y: auto
 }
 
 .list-group-item {
     cursor: pointer;
+    overflow: hidden;
 }
 
 .selected {

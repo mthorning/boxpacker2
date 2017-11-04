@@ -3,9 +3,11 @@ define(['views/base', 'boxes'], function(Base, Boxes) {
     var Box = Base.Item.extend({
         triggers: {
             'click': 'box:click',
-            'change': 'render'
         },
-        onRender: function() {
+        initialize: function() {
+            this.listenTo(this.model, 'change', this.changeSelectionClass);
+        },  
+        changeSelectionClass: function() {
             if(this.model.get('selected')) {
                 this.el.classList.add('selected');
             } else {

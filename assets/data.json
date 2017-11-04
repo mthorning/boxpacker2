@@ -43,6 +43,12 @@
             "type": "item",
             "name": "Plate",
             "box": "Kitchen" 
+        },
+        {
+            "id": 9,
+            "type": "item",
+            "name": "Pillow",
+            "box": "Bedroom" 
         }
     ]
 }

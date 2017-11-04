@@ -52,11 +52,9 @@ define([
             var self = this;
             document.getElementById('inputs').addEventListener('input', function(e) {
                 if(e.target.id === 'search') {
-                    var searchTerm = e.target.value.toLowerCase();
-                    var matchedItems = self.collection.filter(function(model) {
-                        return model.get('name').toLowerCase().indexOf(searchTerm) > -1;
-                    });
-                    console.log(matchedItems);
+                    var searchValue = e.target.value.toLowerCase();
+                    self.itemView.triggerMethod('filter:input', searchValue);
+                    self.boxView.triggerMethod('filter:input', searchValue);
                 } else {
                     if(e.keyCode === 13) {
                         var boxName = document.querySelector('#newBox');
@@ -70,10 +68,8 @@ define([
                         } else if(itemName.value) {
                             self.addItem(itemName);
                         }
-    
                     }
                 }
-
             });                
         },
         addItem: function(itemName) {

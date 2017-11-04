@@ -22,11 +22,38 @@ define(['views/base', 'boxes'], function(Base, Boxes) {
 
     var BoxList = Base.List.extend({
         childView: Box,
+        filterText: '',
         initialize: function() {
             this.listenTo(this.collection, 'remove:selected', this.removeSelected);
         },  
-        filter: function(child) {
-            return child.get('type') === 'box';
+        filter: function(model) {
+            var self = this;
+            return model.get('type') === 'box' &&
+                (model.get('name')
+                    .toLowerCase()
+                    .indexOf(self.filterText) > -1 ||
+            this.findFilteredContainers()
+                .indexOf(model.get('name')) > -1);
+        },
+        findFilteredContainers: function() {
+            var self = this;
+            var boxes = this.collection.filter(function(model) {
+                return model.get('type') === 'item' &&
+                model.get('name')
+                    .toLowerCase()
+                    .indexOf(self.filterText) > -1;
+            });
+            var arr = boxes.map(function(model) {
+                return model.get('box');
+            });
+
+            console.log(arr);
+
+            return arr;
+        },
+        onFilterInput: function(searchText) {
+            this.filterText = searchText;
+            this.render();
         },
         removeSelected: function() {    
             this.collection.filter(function(model) {

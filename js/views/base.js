@@ -5,10 +5,19 @@ define(['marionette'], function(Marionette) {
         tagName: 'li',
         className: 'list-group-item',
         events: {
-            'click #closeButton': 'deleteItem'
+            'click #closeButton': 'deleteItem',
+            'mouseover .fa-remove': 'onMouseOver',
+            'mouseout .fa-remove': 'onMouseOut'
+
         },
         deleteItem: function() {
             this.model.collection.remove(this.model);
+        },
+        onMouseOver: function(e) {
+            this.$('.fa-remove').fadeIn();
+        },
+        onMouseOut: function() {
+            this.$('.fa-remove').fadeOut();
         }
     });
 

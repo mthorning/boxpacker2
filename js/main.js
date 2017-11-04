@@ -21,7 +21,6 @@ require.config({
         },
         'localStorage': {
             deps: ['backbone'],
-            exports: 'Store'
         },
         'underscore': {
             exports: '_'

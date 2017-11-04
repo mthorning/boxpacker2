@@ -12,3 +12,7 @@
 .selected {
     background-color: rgba(173, 217, 230, 0.356);
 }
+
+.fa-remove {
+    display: none;
+}

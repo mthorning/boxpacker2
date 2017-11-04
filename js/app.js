@@ -50,27 +50,26 @@ define([
         },
         setEventListeners: function() {
             var self = this;
-            document.getElementById('inputs').addEventListener('input', function(e) {
-                if(e.target.id === 'search') {
-                    var searchValue = e.target.value.toLowerCase();
-                    self.itemView.triggerMethod('filter:input', searchValue);
-                    self.boxView.triggerMethod('filter:input', searchValue);
-                } else {
-                    if(e.keyCode === 13) {
-                        var boxName = document.querySelector('#newBox');
-                        var itemName = document.querySelector('#newItem');
-                        if(boxName.value) {
-                            self.collection.addBox(boxName.value);
-                            boxName.value = '';
-                            if(itemName.value) {
-                                self.addItem(itemName);
-                            }
-                        } else if(itemName.value) {
+            $('.addInputs').bind('keydown', function(e) {
+                if(e.keyCode === 13) {
+                    var boxName = document.querySelector('#newBox');
+                    var itemName = document.querySelector('#newItem');
+                    if(boxName.value) {
+                        self.collection.addBox(boxName.value);
+                        boxName.value = '';
+                        if(itemName.value) {
                             self.addItem(itemName);
                         }
+                    } else if(itemName.value) {
+                        self.addItem(itemName);
                     }
                 }
-            });                
+            });     
+            $('#searchInput').bind('input', function(e) {
+                var searchValue = e.target.value.toLowerCase();
+                self.itemView.triggerMethod('filter:input', searchValue);
+                self.boxView.triggerMethod('filter:input', searchValue);
+            });        
         },
         addItem: function(itemName) {
             console.log(itemName);

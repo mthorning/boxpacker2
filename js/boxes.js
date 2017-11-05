@@ -34,9 +34,6 @@ define([
                 alert('Please select a box to add the item to.');
             }
         },
-        saveCollection: function() {
-            this.save();
-        },
         newId: function() {
             return this.length ? this.last().get('id') + 1 : 1;
         }

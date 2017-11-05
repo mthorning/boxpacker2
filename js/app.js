@@ -9,7 +9,6 @@ define([
         template: _.template($('#app-tmpl').html()),
         el: '#appContainer',
         regions: {
-            'inputs': '#inputs',
             'boxList': '#boxListPanel',
             'itemList': '#itemListPanel'
         }
@@ -33,8 +32,8 @@ define([
                     self.showBoxes();
                     self.setEventListeners();
                 },
-                error: function(arg) {
-                    console.log("error: ", arg);
+                error: function(arguments) {
+                    console.log("error: ", arguments);
                 } 
             });
         },

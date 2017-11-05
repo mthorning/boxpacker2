@@ -1,4 +1,4 @@
-define(['views/base', 'boxes'], function(Base, Boxes) {
+define(['backbone', 'views/base', 'boxes'], function(Backbone, Base, Boxes) {
 
     var Box = Base.Item.extend({
         triggers: {
@@ -7,10 +7,13 @@ define(['views/base', 'boxes'], function(Base, Boxes) {
         initialize: function() {
             this.listenTo(this.model, 'change', this.changeSelectionClass);
         },  
+        onBeforeRender: function() {
+            this.changeSelectionClass();
+        },
         changeSelectionClass: function() {
             if(this.model.get('selected')) {
                 this.el.classList.add('selected');
-            } else {
+            } else if(this.el.classList.contains('selected')) {
                 this.el.classList.remove('selected');
             }
         },
@@ -43,21 +46,16 @@ define(['views/base', 'boxes'], function(Base, Boxes) {
                     .toLowerCase()
                     .indexOf(self.filterText) > -1;
             });
-            var arr = boxes.map(function(model) {
-                return model.get('box');
-            });
-
-            console.log(arr);
-
-            return arr;
-        },
+            return new Backbone.Collection(boxes).pluck('box');
+        },      
         onFilterInput: function(searchText) {
             this.filterText = searchText;
             this.render();
         },
         removeSelected: function() {    
-            this.collection.filter(function(model) {
-                return model.get('type') === 'box' && model.get('selected');
+            this.collection.where({
+                type: 'box',
+                selected: true
             }).forEach(function(model) {
                 model.unset( 'selected', { silent: false });
             });

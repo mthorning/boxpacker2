@@ -3,7 +3,6 @@ define(['views/base', 'boxes'], function(Base, Boxes) {
     var Item = Base.Item.extend();
 
     var ItemList = Base.List.extend({
-        displayBox: null,
         childView: Item,
         filterText: '',
         filter: function(model) {
@@ -14,7 +13,10 @@ define(['views/base', 'boxes'], function(Base, Boxes) {
                     .indexOf(this.filterText) > -1;
         },
         onBeforeRender: function() {
-            var selectedBox = this.collection.findWhere({ selected: true });
+            var selectedBox = this.collection.findWhere({
+                selected: true,
+                type: 'box'
+            });
             if(selectedBox) {
                 this.displayBox = selectedBox.get('name');
             } else {

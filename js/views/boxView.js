@@ -20,6 +20,7 @@ define(['backbone', 'views/base', 'boxes'], function(Backbone, Base, Boxes) {
         onBoxClick: function() {
             this.model.trigger('remove:selected');
             this.model.set({ selected: true });
+            $('#newItem').focus();
         }
     });
 

@@ -51,17 +51,25 @@ define([
             var self = this;
             $('.addInputs').bind('keydown', function(e) {
                 if(e.keyCode === 13) {
-                    var boxName = document.querySelector('#newBox');
-                    var itemName = document.querySelector('#newItem');
-                    if(boxName.value) {
-                        self.collection.addBox(boxName.value);
-                        boxName.value = '';
-                        if(itemName.value) {
-                            self.addItem(itemName);
+                    var boxInput = document.querySelector('#newBox');
+                    var itemInput = document.querySelector('#newItem');
+                    if(boxInput.value) {
+                        var boxName = self.format(boxInput.value);
+                        var boxes = new Backbone.Collection(self.collection
+                            .where({ type: 'box' }));
+                        if(boxes.pluck('name').indexOf(boxName) === -1) {
+                            self.collection.addBox(boxName);                            
+                        } else {
+                            alert('A box of this name already exists.')
                         }
-                    } else if(itemName.value) {
+                        boxInput.value = '';
+                        if(itemInput.value) {
+                            self.addItem(itemInput);
+                        }
+                    } else if(itemInput.value) {
                         self.addItem(itemName);
                     }
+                    $('#newItem').focus();
                 }
             });     
             $('#searchInput').bind('input', function(e) {
@@ -71,8 +79,20 @@ define([
             });        
         },
         addItem: function(itemName) {
-            this.collection.addItem(itemName.value);
+            this.collection.addItem(this.format(itemName.value));
             itemName.value = '';
+        },
+        format: function(input) {
+            var output = [];
+            var words = input.split(' ' );
+            words.forEach(function(word) {
+                var lowered = word.split('').map(function(letter) {
+                    return letter.toLowerCase();
+                });
+                lowered.splice(0, 1, lowered[0].toUpperCase());
+                output.push(lowered.join(''));
+            });
+            return output.join(' ');
         }
     });
 

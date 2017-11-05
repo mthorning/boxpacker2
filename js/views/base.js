@@ -8,7 +8,15 @@ define(['marionette'], function(Marionette) {
             'click #closeButton': 'deleteItem',
         },
         deleteItem: function() {
-            this.model.destroy();
+            var target = this.model;
+            if(target.get('type') === 'box') {
+                target.collection.where({ type: 'item' }).forEach(function(model) {
+                    if(model.get('box') === target.get('name')) {
+                        model.destroy();
+                    }
+                });
+            } 
+            target.destroy();
         }
     });
 

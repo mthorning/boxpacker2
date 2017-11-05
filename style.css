@@ -13,3 +13,11 @@
     background-color: rgba(173, 217, 230, 0.356);
 }
 
+.fa-remove {
+    color: rgba(136, 136, 136, 0.4);
+}
+
+.list-group-item:hover .fa-remove {
+    color: #333;
+}
+

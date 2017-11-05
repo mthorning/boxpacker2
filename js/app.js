@@ -71,7 +71,6 @@ define([
             });        
         },
         addItem: function(itemName) {
-            console.log(itemName);
             this.collection.addItem(itemName.value);
             itemName.value = '';
         }

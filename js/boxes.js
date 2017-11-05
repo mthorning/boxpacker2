@@ -1,15 +1,13 @@
 define([
-    'marionette'
-    ], function(Marionette) {
+    'marionette',
+    'localStorage'
+    ], function(Marionette, LocalStorage) {
 
     var BoxModel = Backbone.Model.extend();
 
     var BoxCollection = Backbone.Collection.extend({
-        url: 'assets/data.json',
         model: BoxModel,
-        parse: function(data) {
-            return data.inventory;
-        },
+        localStorage: new LocalStorage('boxes'),
         addBox: function(name) {
             var box = new BoxModel({
                 type: 'box',
@@ -18,6 +16,7 @@ define([
             });
             this.trigger('remove:selected');
             this.add(box);
+            box.save();
             box.set({ selected: true });
         },
         addItem:  function(name) {
@@ -30,6 +29,7 @@ define([
                     box: box
                 });
                 this.add(item);
+                item.save();
             } else {
                 alert('Please select a box to add the item to.');
             }
